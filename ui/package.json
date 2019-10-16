@@ -123,12 +123,11 @@
   },
   "jest": {
     "resetMocks": true,
-    "setupTestFrameworkScriptFile": "<rootDir>/src/scripts/testSetup.js",
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "js/**/*.{js,jsx}"
     ],
     "testMatch": [
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+      "<rootDir>/js/**/?(*.)(spec|test).js?(x)"
     ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
@@ -155,7 +154,7 @@
       "node_modules"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|ico)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|ico)$": "<rootDir>/js/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     }
   },
@@ -164,10 +163,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "printWidth": 120
-  }
+  ]
 }
