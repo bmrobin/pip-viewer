@@ -1,6 +1,6 @@
 const url = 'http://localhost:5000';
 
-export function get_installed_packages() {
+export async function get_installed_packages() {
   return fetch(`${url}/installed`, {
     method: 'get',
   });

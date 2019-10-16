@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
-import { getPackages, uninstallPackage } from 'src/redux/actions/packageActions';
+import { get_installed_packages } from 'src/api';
 import Package from './Package';
 
-class PackageList extends React.Component {
-  componentDidMount() {
-    this.props.getPackages();
+export default class PackageList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      packageList: [],
+    };
+  }
+
+  async componentDidMount() {
+    const packageListResponse = await get_installed_packages();
+    const packageList = await packageListResponse.json();
+    this.setState({
+      packageList,
+    });
   }
 
   render() {
-    const packages = this.props.packageList.map(pkg => (
+    const packages = this.state.packageList.map(pkg => (
       <Package key={pkg.name} version={pkg.version} name={pkg.name} />
     ));
     return (
@@ -27,17 +37,3 @@ class PackageList extends React.Component {
     );
   }
 }
-
-PackageList.propTypes = {
-  getPackages: PropTypes.func.isRequired,
-  packageList: PropTypes.arrayOf(Package).isRequired,
-};
-
-const mapStateToProps = state => ({
-  packageList: state.packages.packages,
-});
-
-export default connect(
-  mapStateToProps,
-  { getPackages },
-)(PackageList);
