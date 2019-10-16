@@ -1,27 +1,24 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const path = require('path');
 
 const srcBase = __dirname;
-const srcDir = `${srcBase}/src`;
+const srcDir = `${srcBase}/js`;
 const cssDir = `${srcBase}/css`;
-const imagesDir = `${srcBase}/images`;
-const buildDir = path.join(srcBase, 'build');
+const buildDir = `${srcBase}/build`;
 
 module.exports = {
-  context: srcDir,
-  entry: ['babel-polyfill', './index.js'],
+  context: srcBase,
+  entry: ['babel-polyfill', './js/index.js'],
   output: {
     path: buildDir,
-    filename: '[name]-[hash].js',
+    filename: '[name].js',
+    publicPath: buildDir,
   },
   resolve: {
     alias: {
       // this will enable us to use 'src' as a prefix for imports
       src: srcDir,
       css: cssDir,
-      images: imagesDir,
     },
   },
   module: {
@@ -60,34 +57,6 @@ module.exports = {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: 'file-loader',
       },
-      {
-        test: /\.svg$/,
-        loader: 'babel-loader!svg-react-loader',
-      },
-      {
-        test: /\.(jpg|png|gif|ico)$/,
-        use: [
-          'url-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              mozjpeg: {
-                progressive: true,
-              },
-              optiPng: {
-                optimizationLevel: 7,
-              },
-            },
-          },
-        ],
-      },
     ],
   },
   devtool: 'source-map',
@@ -98,11 +67,6 @@ module.exports = {
     contentBase: buildDir,
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: './index.html',
-      // favicon: './src/public/favicon.ico'
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

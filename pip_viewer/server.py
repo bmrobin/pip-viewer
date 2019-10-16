@@ -1,21 +1,18 @@
 import logging
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask.json import jsonify
 from flask_cors import cross_origin
 from .pip_commands import PipCommands
 
 logger = logging.getLogger(__name__)
-app = Flask('pip-viewer')
+app = Flask(__name__, static_folder='../ui/build', template_folder='../ui')
 commands = PipCommands()
 
 
 @app.route('/')
 def main():
-    return 'pip-viewer\n\n' \
-           'available options: \n'\
-           'GET /installed \n'\
-           'POST /install {name}\n'
+    return render_template('index.html')
 
 
 @app.route('/installed')
@@ -52,3 +49,8 @@ def uninstall():
         return jsonify(f"Successfully uninstalled {package_name}")
     except KeyError as err:
         logger.error(err)
+
+
+if __name__ == '__main__':
+    # not quite functional - use pycharm flask server in debug mode instead
+    app.run(debug=True)

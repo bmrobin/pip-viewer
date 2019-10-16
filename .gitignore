@@ -4,8 +4,8 @@
 .DS_Store
 
 /coverage
-client/build
-client/node_modules
+ui/build
+ui/node_modules
 
 npm-debug.log*
 yarn-debug.log*

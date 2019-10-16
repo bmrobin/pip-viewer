@@ -43,7 +43,6 @@
     "filewatcher-webpack-plugin": "1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
-    "image-webpack-loader": "^3.4.2",
     "jest": "^22.0.4",
     "jest-junit": "^3.1.0",
     "less": "3.0.4",
@@ -63,10 +62,10 @@
     "yarn": "^1.1.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack",
+    "start": "webpack --progress -d --config webpack.config.js --watch",
+    "build": "webpack -p --progress --config webpack.config.js",
     "test": "jest",
-    "dev": "webpack-dev-server"
+    "watch": "webpack --progress -d --config webpack.config.js --watch"
   },
   "babel": {
     "presets": [
@@ -93,8 +92,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "airbnb",
-      "prettier"
+      "airbnb"
     ],
     "env": {
       "browser": true,
@@ -124,11 +122,9 @@
       "react/no-multi-comp": 0,
       "react/react-in-jsx-scope": 2,
       "react/no-array-index-key": 0,
-      "prettier/prettier": "error",
       "jsx-a11y/label-has-for": 0
     },
     "plugins": [
-      "prettier",
       "react"
     ]
   },
