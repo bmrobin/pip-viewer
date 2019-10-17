@@ -6,11 +6,12 @@
 * node >= 10.15.x
 
 ## Installation
-Install server dependencies
+Install server dependencies and set environment variables
 
     $ virtualenv -p python3 venv
     $ source venv/bin/activate
     $ pip install -r requirements.txt
+    $ source bin/setup.sh
 
 Install UI dependencies
 
@@ -22,11 +23,6 @@ Install UI dependencies
 The following assumes execution via command line. If using an IDE, configure the following via debug options.
 
     $ ( from ui folder ) npm start
-
-    $ export FLASK_APP=server.py
-    $ export FLASK_ENV=development
-    $ export FLASK_DEBUG=1
-    $ cd pip_viewer
     $ python -m flask run
 
 ## Tests
