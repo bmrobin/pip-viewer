@@ -129,6 +129,9 @@
     "testMatch": [
       "<rootDir>/js/**/?(*.)(spec|test).js?(x)"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules"
+    ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
     "testResultsProcessor": "jest-junit",

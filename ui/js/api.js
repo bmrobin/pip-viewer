@@ -1,12 +1,14 @@
 const url = 'http://localhost:5000';
 
 export async function get_installed_packages() {
+  console.debug('[api] fetching package list...');
   return fetch(`${url}/installed`, {
     method: 'get',
   });
 }
 
-export function install_package(name) {
+export async function install_package(name) {
+  console.debug(`[api] installing package ${name}...`);
   return fetch(`${url}/install`, {
     method: 'post',
     headers: {
@@ -16,7 +18,8 @@ export function install_package(name) {
   });
 }
 
-export function uninstall_package(name) {
+export async function uninstall_package(name) {
+  console.debug(`[api] uninstalling package ${name}...`);
   return fetch(`${url}/uninstall`, {
     method: 'post',
     headers: {

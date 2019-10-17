@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Package component should render component 1`] = `
+<tr>
+  <td>
+    pkgName
+  </td>
+  <td>
+    1.2.3
+  </td>
+  <td>
+    <button
+      bssize="sm"
+      className="btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      X
+    </button>
+  </td>
+</tr>
+`;

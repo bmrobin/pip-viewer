@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
-import { get_installed_packages } from 'src/api';
+import { get_installed_packages, uninstall_package } from 'src/api';
 import Package from './Package';
 
 export default class PackageList extends React.Component {
@@ -22,7 +22,12 @@ export default class PackageList extends React.Component {
 
   render() {
     const packages = this.state.packageList.map(pkg => (
-      <Package key={pkg.name} version={pkg.version} name={pkg.name} />
+      <Package
+        key={pkg.name}
+        version={pkg.version}
+        name={pkg.name}
+        uninstall={uninstall_package}
+      />
     ));
     return (
       <Table striped responsive hover>
