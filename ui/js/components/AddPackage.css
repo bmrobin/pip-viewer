@@ -2,3 +2,15 @@
     margin: 10px;
     float: right;
 }
+
+.pkg-name {
+    width: 70%
+}
+
+.pkg-name-label {
+    padding-right: 15px;
+}
+
+.error {
+    color: darkred;
+}

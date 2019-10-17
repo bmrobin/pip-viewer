@@ -50,14 +50,20 @@ export default function AddPackage() {
           <Modal.Title>Add a pip Package</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label htmlFor="add-pkg">
-            Package Name
+          <label htmlFor="add-pkg" className="pkg-name-label">
+            Package Name:
           </label>
-          <input id="add-pkg" type="text" value={packageName} onChange={handlePackageChange} />
+          <input
+            id="add-pkg"
+            type="text"
+            value={packageName}
+            onChange={handlePackageChange}
+            className="pkg-name"
+          />
           {
             installError &&
-            <div>
-              <p>Error installing {packageName}!!!</p>
+            <div className="error">
+              <p>Error installing &quot;{packageName}&quot;</p>
               <p>{installErrorMsg}</p>
             </div>
           }
