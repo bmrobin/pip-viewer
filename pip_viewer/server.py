@@ -42,6 +42,8 @@ def uninstall():
         result = commands.uninstall(package_name)
         if PipCommands.has_error(result):
             return jsonify(result.stdout.decode('utf-8')), 500
+        elif result is False:
+            return jsonify(f'Uninstalling package {package_name} is not allowed'), 422
         return jsonify(f"Successfully uninstalled {package_name}")
     except KeyError as err:
         logger.error(err)

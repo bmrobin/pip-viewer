@@ -30,15 +30,17 @@ export default class PackageList extends React.Component {
       />
     ));
     return (
-      <Table striped responsive hover>
-        <thead>
-          <tr>
-            <td>Pkg Name</td>
-            <td>Pkg Version</td>
-          </tr>
-        </thead>
-        <tbody>{packages}</tbody>
-      </Table>
+      <div className="pkg-list-table">
+        <Table striped responsive hover>
+          <thead>
+            <tr>
+              <td>Pkg Name</td>
+              <td>Pkg Version</td>
+            </tr>
+          </thead>
+          <tbody>{packages}</tbody>
+        </Table>
+      </div>
     );
   }
 }
