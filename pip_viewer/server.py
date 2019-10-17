@@ -15,7 +15,7 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/installed')
+@app.route('/installed', methods=['GET'])
 @cross_origin()
 def get_installed():
     return jsonify(commands.get_installed())
@@ -24,8 +24,6 @@ def get_installed():
 @app.route('/install', methods=['POST'])
 @cross_origin()
 def install():
-    if request.method != 'POST':
-        raise RuntimeError('HTTP 400 - unsupported request method. only POST allowed')
     try:
         package_name = request.json['pkgName']
         result = commands.install(package_name)
@@ -39,13 +37,11 @@ def install():
 @app.route('/uninstall', methods=['POST'])
 @cross_origin()
 def uninstall():
-    if request.method != 'POST':
-        raise RuntimeError('HTTP 400 - unsupported request method. only POST allowed')
     try:
         package_name = request.json['pkgName']
         result = commands.uninstall(package_name)
         if PipCommands.has_error(result):
-            return jsonify(result.stdout.decode('utf-8'))
+            return jsonify(result.stdout.decode('utf-8')), 500
         return jsonify(f"Successfully uninstalled {package_name}")
     except KeyError as err:
         logger.error(err)

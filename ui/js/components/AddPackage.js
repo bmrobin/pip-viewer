@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { install_package } from 'src/api';
-import './AddPackage.css';
 
 export default function AddPackage() {
   const [showPkgModal, setShowPkgModal] = useState(false);

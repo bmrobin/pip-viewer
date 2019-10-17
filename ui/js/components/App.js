@@ -1,6 +1,7 @@
 import React from 'react';
 import AddPackage from 'src/components/AddPackage';
 import PackageList from 'src/components/PackageList';
+import './App.css';
 
 export default function App() {
   return (
