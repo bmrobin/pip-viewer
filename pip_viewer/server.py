@@ -52,5 +52,4 @@ def uninstall():
 
 
 if __name__ == '__main__':
-    # not quite functional - use pycharm flask server in debug mode instead
     app.run(debug=True)
