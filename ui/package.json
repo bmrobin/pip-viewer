@@ -134,7 +134,6 @@
     ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
-    "testResultsProcessor": "jest-junit",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
     },
