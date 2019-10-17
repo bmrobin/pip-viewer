@@ -4,26 +4,39 @@ import { install_package } from 'src/api';
 import './AddPackage.css';
 
 export default function AddPackage() {
-  const [show, setShow] = useState(false);
+  const [showPkgModal, setShowPkgModal] = useState(false);
   const [packageName, setPackageName] = useState('');
+  const [installError, setInstallError] = useState(false);
+  const [installErrorMsg, setInstallErrorMsg] = useState('');
 
-  const handleClose = () => {
-    setShow(false);
+  const clear = () => {
+    setShowPkgModal(false);
     setPackageName('');
+    setInstallError(false);
+    setInstallErrorMsg('');
   };
 
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    clear();
+  };
+
+  const handleShow = () => setShowPkgModal(true);
 
   const handlePackageChange = (e) => {
-    const pkgName = e.target.value;
-    console.log(pkgName);
-    setPackageName(pkgName);
+    setInstallError(false);
+    setPackageName(e.target.value);
   };
 
   const handleSave = async () => {
-    setShow(false);
-    const response = await install_package(packageName);
-    console.log(response);
+    /* TODO - implement change check to not do this if the value hasn't changed */
+    const installResponse = await install_package(packageName);
+    if (installResponse.status !== 200) {
+      setInstallError(true);
+      const error = await installResponse.json();
+      setInstallErrorMsg(error);
+    } else {
+      clear();
+    }
   };
 
   return (
@@ -32,7 +45,7 @@ export default function AddPackage() {
         Add Package
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showPkgModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add a pip Package</Modal.Title>
         </Modal.Header>
@@ -41,6 +54,13 @@ export default function AddPackage() {
             Package Name
           </label>
           <input id="add-pkg" type="text" value={packageName} onChange={handlePackageChange} />
+          {
+            installError &&
+            <div>
+              <p>Error installing {packageName}!!!</p>
+              <p>{installErrorMsg}</p>
+            </div>
+          }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

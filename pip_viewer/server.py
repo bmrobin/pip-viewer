@@ -30,7 +30,7 @@ def install():
         package_name = request.json['pkgName']
         result = commands.install(package_name)
         if PipCommands.has_error(result):
-            return jsonify(result.stdout.decode('utf-8'))
+            return jsonify(result.stdout.decode('utf-8')), 500
         return jsonify(f"Successfully installed {package_name}")
     except KeyError as err:
         logger.error(err)
